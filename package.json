@@ -4,10 +4,14 @@
   "description": "A simple helper library to scrape html data from par.nsf.gov.",
   "main": "lib/index.js",
   "files": [
-    "lib/**/*",
-    "LICENSE",
-    "README.md"
+    "lib/**/*"
   ],
+  "homepage": "https://github.com/ptforness/nsf-par-scraper",
+  "bugs": {
+    "url": "https://github.com/ptforness/nsf-par-scraper/issues",
+    "email": "ptforness@gmail.com"
+  },
+  "repository": "github:ptforness/nsf-par-scraper",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "test:coverage": "jest --config jestconfig.json --coverage",
@@ -23,7 +27,7 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "author": "Paul Forness",
+  "author": "Paul Forness <ptforness@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.11.2",
