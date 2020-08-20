@@ -1,0 +1,57 @@
+{
+  "name": "nsf-par-scraper",
+  "version": "0.1.0",
+  "description": "A simple helper library to scrape html data from par.nsf.gov.",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "test:coverage": "jest --config jestconfig.json --coverage",
+    "build": "babel src --out-dir lib --extensions \".js,.ts\" --ignore \"src/**/*.test.ts\",\"src/**/*.d.ts\"",
+    "build:declaration": "rm -f ./src/index.d.ts && tsc --outFile ./src/index.d.ts && cp ./src/index.d.ts ./lib/index.d.ts",
+    "build:watch": "babel src --out-dir lib --extensions \".js,.ts\" --ignore \"src/**/*.test.ts\",\"src/**/*.d.ts\" --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint ./src --ext .js,.ts",
+    "docs": "typedoc",
+    "prepare": "npm run build:declaration && npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "author": "Paul Forness",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "cheerio": "^1.0.0-rc.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/plugin-transform-spread": "^7.11.0",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/cheerio": "^0.22.21",
+    "@types/jest": "^26.0.10",
+    "@types/node": "^14.6.0",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/parser": "^3.9.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "jest": "^26.4.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.2.0",
+    "typedoc": "^0.18.0",
+    "typescript": "^3.9.7"
+  }
+}
