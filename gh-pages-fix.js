@@ -9,11 +9,38 @@ const interfaces = path.join(documentationFolder, 'interfaces/');
 const modules = path.join(documentationFolder, 'modules/');
 rename(interfaces);
 rename(modules);
+fixLinks(interfaces);
+fixLinks(modules);
 
 function rename(folder) {
     fs.readdirSync(folder).forEach(file => {
         if(file.startsWith('_')) {
             fs.renameSync(path.join(folder, file), path.join(folder, file.substring(1)));
         }
-    })
+    });
+}
+
+function fixLinks(folder) {
+    const regex = /(?:href\=\")(.*?)(?:\")/g;
+    fs.readdirSync(folder).forEach(file => {
+        if(file.endsWith('.html')) {
+            fs.readFile(path.join(folder, file), 'utf8', (err, data) => {
+                if (err) {
+                    throw err;
+                }
+                const matches = data.match(regex);
+                for (const match of matches) {
+                    if (match.startsWith('href="_')) {
+                        data = data.replace(match, match.replace('_', ''));
+                    }
+                }
+
+                fs.writeFile(path.join(folder, file), data, 'utf8', err => {
+                    if (err) {
+                        throw err;
+                    }
+                });
+            });
+        }
+    });
 }
