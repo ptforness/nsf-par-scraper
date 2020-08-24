@@ -31,19 +31,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run docs && lint-staged"
+      "pre-commit": "npm run docs && git add docs/ && lint-staged"
     }
   },
   "lint-staged": {
-    "docs/**/*": "git add",
     "package.json": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "src/**/*.{js,ts}": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "dependencies": {
