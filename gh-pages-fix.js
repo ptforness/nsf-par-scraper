@@ -9,6 +9,7 @@ const interfaces = path.join(documentationFolder, 'interfaces/');
 const modules = path.join(documentationFolder, 'modules/');
 rename(interfaces);
 rename(modules);
+fixLinks(documentationFolder)
 fixLinks(interfaces);
 fixLinks(modules);
 
