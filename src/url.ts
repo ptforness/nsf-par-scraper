@@ -1,5 +1,16 @@
+// url.ts
+/**
+ * @internal
+ * @packageDocumentation
+ */
+
 import { NsfParSortOrder as urlBuilder } from "./index";
 
+/**
+ * @internal
+ * @param pageNumber
+ * @param sortOrder
+ */
 export function get(
   pageNumber = 1,
   sortOrder: urlBuilder = "Relevance"
@@ -20,6 +31,12 @@ export function get(
   return url;
 }
 
+/**
+ * @internal
+ * @param startPage
+ * @param endPage
+ * @param sortOrder
+ */
 export function getRange(
   startPage: number,
   endPage: number,

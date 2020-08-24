@@ -1,3 +1,9 @@
+// scrape.ts
+/**
+ * @internal
+ * @packageDocumentation
+ */
+
 import * as cheerio from "cheerio";
 import { NsfParMetadata, NsfParPublication, NsfParResponse } from "./index";
 import { processDoi, processReleaseDate } from "./processing";
@@ -5,6 +11,7 @@ import { processDoi, processReleaseDate } from "./processing";
 /**
  * Scrapes publication data from an empty query against the NSF PAR.
  * @remarks Only empty queries are supported, as result accuracy with any non-sort parameter has been low in my experience.
+ * @internal
  * @param data The raw response data to be scraped
  * @returns The processed publication data and search metadata for the given page number
  */
@@ -17,7 +24,7 @@ export function scrapeResponse(html: string | Buffer): NsfParResponse {
 }
 
 /**
- * @ignore
+ * @internal
  * @param response
  */
 export function getMetadata(response: CheerioStatic): NsfParMetadata {
@@ -30,7 +37,7 @@ export function getMetadata(response: CheerioStatic): NsfParMetadata {
 }
 
 /**
- * @ignore
+ * @internal
  * @param response
  */
 export function getPublications(response: CheerioStatic): NsfParPublication[] {

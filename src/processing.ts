@@ -1,5 +1,11 @@
+// processing.ts
 /**
- * @ignore
+ * @internal
+ * @packageDocumentation
+ */
+
+/**
+ * @internal
  * @param doi
  */
 export function processDoi(doi: string): string | undefined {
@@ -21,7 +27,7 @@ export function processDoi(doi: string): string | undefined {
 }
 
 /**
- * @ignore
+ * @internal
  * @param releaseDateText
  */
 export function processReleaseDate(releaseDateText: string): Date | undefined {

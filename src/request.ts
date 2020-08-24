@@ -1,5 +1,15 @@
+// request.ts
+/**
+ * @internal
+ * @packageDocumentation
+ */
+
 import axios, { AxiosResponse } from "axios";
 
+/**
+ * @internal
+ * @param url
+ */
 export async function request(url: string): Promise<string> {
   try {
     const res: AxiosResponse = await axios.get(url);

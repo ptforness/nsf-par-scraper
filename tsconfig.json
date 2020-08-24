@@ -27,6 +27,7 @@
         "mode": "commonjs",
         "out": "docs",
         "exclude": "**/*.test.ts",
+        "stripInternal": true,
         "excludeExternals": true,
         "excludeNotExported": true,
         "excludePrivate": true,
