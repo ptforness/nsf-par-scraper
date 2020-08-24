@@ -31,12 +31,20 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint --fix && npm run format && npm run docs"
+      "pre-commit": "npm run docs && lint-staged"
     }
   },
   "lint-staged": {
-    "*.json": "prettier --write",
-    "*.{js,ts}": "eslint --cache --fix"
+    "docs/**/*": "git add",
+    "package.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
@@ -64,6 +72,7 @@
     "eslint-plugin-jest": "^23.20.0",
     "husky": "^4.2.5",
     "jest": "^26.4.2",
+    "lint-staged": "^10.2.11",
     "prettier": "^2.1.0",
     "prettier-plugin-organize-imports": "^1.1.1",
     "prettier-plugin-packagejson": "^2.2.5",
