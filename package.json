@@ -18,8 +18,9 @@
     "build": "babel src --out-dir lib --extensions \".js,.ts\" --ignore \"src/**/*.test.ts\",\"src/**/*.d.ts\"",
     "build:declaration": "rm -f ./src/index.d.ts && tsc --outFile ./src/index.d.ts && cp ./src/index.d.ts ./lib/index.d.ts",
     "build:watch": "babel src --out-dir lib --extensions \".js,.ts\" --ignore \"src/**/*.test.ts\",\"src/**/*.d.ts\" --watch",
-    "docs": "typedoc",
+    "docs": "typedoc && npm run gh-pages-fix",
     "format": "prettier --write \"src/**/*.ts\" \"package.json\"",
+    "gh-pages-fix": "node gh-pages-fix",
     "lint": "eslint ./src --ext .js,.ts",
     "prepare": "npm run build && npm run build:declaration",
     "prepublishOnly": "npm run test && npm run lint && npm run format",
@@ -31,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run docs && git add docs/ && lint-staged"
+      "pre-commit": "npm run test && npm run docs && git add docs/ && lint-staged"
     }
   },
   "lint-staged": {
