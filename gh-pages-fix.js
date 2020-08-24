@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { getJSDocReturnType } = require('typescript');
 //const filePath = './docs/config.yml';
 //const data = "include:\n- \"_*_.html\"\n- \"_*_.*.html\"";
 //fs.writeFileSync(filePath, data);
@@ -22,7 +23,7 @@ function rename(folder) {
 }
 
 function fixLinks(folder) {
-    const regex = /(?:href\=\")(.*?)(?:\")/g;
+    const regex = /(?:href\=\")(?:modules\/|interfaces\/)?(.*?)(?:\")/g;
     fs.readdirSync(folder).forEach(file => {
         if(file.endsWith('.html')) {
             fs.readFile(path.join(folder, file), 'utf8', (err, data) => {
@@ -30,10 +31,9 @@ function fixLinks(folder) {
                     throw err;
                 }
                 const matches = data.match(regex);
+                if (matches == null) return;
                 for (const match of matches) {
-                    if (match.startsWith('href="_')) {
-                        data = data.replace(match, match.replace('_', ''));
-                    }
+                    data = data.replace(match, match.replace('_', ''));
                 }
 
                 fs.writeFile(path.join(folder, file), data, 'utf8', err => {
