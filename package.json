@@ -2,40 +2,46 @@
   "name": "nsf-par-scraper",
   "version": "0.1.2",
   "description": "A simple helper library to scrape html data from par.nsf.gov.",
-  "main": "lib/index.js",
-  "files": [
-    "lib/**/*"
-  ],
   "homepage": "https://github.com/ptforness/nsf-par-scraper",
   "bugs": {
     "url": "https://github.com/ptforness/nsf-par-scraper/issues",
     "email": "ptforness@gmail.com"
   },
   "repository": "github:ptforness/nsf-par-scraper",
+  "license": "MIT",
+  "author": "Paul Forness <ptforness@gmail.com>",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "test": "jest --config jestconfig.json",
-    "test:coverage": "jest --config jestconfig.json --coverage",
     "build": "babel src --out-dir lib --extensions \".js,.ts\" --ignore \"src/**/*.test.ts\",\"src/**/*.d.ts\"",
     "build:declaration": "rm -f ./src/index.d.ts && tsc --outFile ./src/index.d.ts && cp ./src/index.d.ts ./lib/index.d.ts",
     "build:watch": "babel src --out-dir lib --extensions \".js,.ts\" --ignore \"src/**/*.test.ts\",\"src/**/*.d.ts\" --watch",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint ./src --ext .js,.ts",
     "docs": "typedoc",
+    "format": "prettier --write \"src/**/*.ts\" \"package.json\"",
+    "lint": "eslint ./src --ext .js,.ts",
     "prepare": "npm run build && npm run build:declaration",
-    "prepublishOnly": "npm run test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
+    "prepublishOnly": "npm run test && npm run lint && npm run format",
+    "test": "jest --config jestconfig.json",
+    "test:coverage": "jest --config jestconfig.json --coverage",
+    "preversion": "npm run lint && npm run format",
+    "version": "git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "author": "Paul Forness <ptforness@gmail.com>",
-  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint --fix && npm run format && npm run docs"
+    }
+  },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.11.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-transform-arrow-functions": "^7.10.4",
@@ -47,15 +53,22 @@
     "@types/cheerio": "^0.22.21",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
-    "@typescript-eslint/eslint-plugin": "^3.9.1",
-    "@typescript-eslint/parser": "^3.9.1",
+    "@typescript-eslint/eslint-plugin": "^3.10.0",
+    "@typescript-eslint/parser": "^3.10.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest": "^23.20.0",
-    "jest": "^26.4.0",
-    "prettier": "^2.0.5",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.0",
+    "prettier-plugin-organize-imports": "^1.1.1",
+    "prettier-plugin-packagejson": "^2.2.5",
     "ts-jest": "^26.2.0",
     "typedoc": "^0.18.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.json": "prettier --write"
   }
 }
